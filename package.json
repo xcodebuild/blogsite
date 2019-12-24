@@ -1,0 +1,41 @@
+{
+  "name": "hexo-site",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server",
+    "sync": "env YUQUE_TOKEN=aCKllKqUGCxkLCEShGroAxxhv1GOMeAyiSk1Px0z yuque-hexo sync",
+    "serve": "cd public && static-server -i index.html -p 80"
+  },
+  "hexo": {
+    "version": "4.2.0"
+  },
+  "dependencies": {
+    "hexo": "^4.0.0",
+    "hexo-generator-archive": "^1.0.0",
+    "hexo-generator-category": "^1.0.0",
+    "hexo-generator-index": "^1.0.0",
+    "hexo-generator-tag": "^1.0.0",
+    "hexo-renderer-ejs": "^1.0.0",
+    "hexo-renderer-stylus": "^1.1.0",
+    "hexo-renderer-marked": "^2.0.0",
+    "hexo-server": "^1.0.0"
+  },
+  "yuqueConfig": {
+    "postPath": "source/_posts/yuque",
+    "cachePath": "yuque.json",
+    "mdNameFormat": "slug",
+    "adapter": "hexo",
+    "concurrency": 5,
+    "baseUrl": "https://www.yuque.com/api/v2",
+    "login": "xcodebuild",
+    "repo": "blog",
+    "onlyPublished": false
+  },
+  "devDependencies": {
+    "yuque-hexo": "^1.6.2"
+  }
+}

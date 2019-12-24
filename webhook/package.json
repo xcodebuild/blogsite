@@ -1,0 +1,23 @@
+{
+  "name": "webhook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "greenlock-express": "^2.7.18",
+    "koa": "^2.11.0",
+    "shelljs": "^0.8.3"
+  },
+  "dependencies": {
+    "greenlock": "^3.1.5",
+    "greenlock-koa": "^2.1.4",
+    "koa-sslify": "^2.2.0",
+    "koa-static": "^5.0.0"
+  }
+}
