@@ -36,6 +36,7 @@
     "onlyPublished": false
   },
   "devDependencies": {
+    "hexo-generator-feed": "^2.2.0",
     "yuque-hexo": "^1.6.2"
   }
 }
