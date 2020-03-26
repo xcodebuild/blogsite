@@ -1,3 +1,16 @@
 <!-- styles -->
-<%- css('lib/font-awesome/css/all.min.css') %>
-<%- css('lib/justified-gallery/css/justifiedGallery.min.css') %>
+<script>
+  (function() {
+	function loadCSS(css) {
+		var timeout = window.requestAnimationFrame || window.setTimeout;
+		var tag = document.createElement('link');
+		tag.rel = 'stylesheet';
+		tag.href = css;
+		timeout(function(){
+			document.head.appendChild(tag);
+		});
+	}
+	loadCSS('/lib/font-awesome/css/all.min.css');
+	loadCSS('/lib/justified-gallery/css/justifiedGallery.min.css');
+  })()
+</script>
