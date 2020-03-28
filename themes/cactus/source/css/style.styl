@@ -4,7 +4,14 @@
 @import "_mixins"
 @import "_extend"
 @import "_fonts"
-
+body {
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Segoe UI", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    color: #9caec7;
+}
+img {
+    opacity: .75;
+    transition: opacity .5s ease-in-out;
+}
 .inline {
 
   display: inline;
@@ -651,7 +658,6 @@ body .h1 {
 
   margin-bottom: 1rem;
 
-  color: #2bbc8a;
 
   letter-spacing: 0.01em;
 
@@ -679,8 +685,6 @@ body .h2 {
 
   margin-bottom: 0.5rem;
 
-  color: #eee;
-
   text-transform: none;
 
   letter-spacing: normal;
@@ -692,8 +696,6 @@ body .h2 {
 }
 
 body h3 {
-
-  color: #eee;
 
   text-decoration: underline;
 
@@ -713,7 +715,6 @@ body h6 {
 
   text-decoration: none;
 
-  color: #ccc;
 
   font-weight: bold;
 
@@ -891,12 +892,9 @@ html
 body
   margin: 0
   height: 100%
-  background-color: $color-background
-  color: $color-text
+  background-color: #18222d
   font-display: swap // @stylint ignore
-  font-weight: 400
   font-size: $font-size
-  font-family: $font-family-body
   line-height: $line-height
   text-rendering: geometricPrecision
   flex: 1

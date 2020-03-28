@@ -1,10 +1,14 @@
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
+<meta http-equiv="Cache-control" content="public">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="referrer" content="no-referrer">
+
+<link rel="preconnect" href="https://cdn.nlark.com" />
+<link rel="dns-prefetch" href="https://cdn.nlark.com" />
 
     <%- open_graph({
         image:          thumbnail(page),
@@ -40,7 +44,7 @@
     <!-- title -->
     <title><%= page_title() %></title>
     <!-- styles -->
-    <%- css('css/style') %>
+    <link rel="stylesheet" href="/css/style.css?t=<%=new Date().toISOString().slice(0, 13)%>">
     <!-- persian styles -->
     <% if (theme.direction) { %>
       <%- css('css/rtl') %>
