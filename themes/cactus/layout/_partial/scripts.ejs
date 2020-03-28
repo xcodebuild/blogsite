@@ -103,7 +103,7 @@
 <script>
 setTimeout(function() {
   document.querySelectorAll('a[href]').forEach(function(item) {
-    if (item.href.indexOf('xcodebuild.com') === -1 || item.href[item.href.length - 1] !== '/') return;
+    if (item.href.startsWith('https://www.xcodebuild.com/') === -1 || item.href[item.href.length - 1] !== '/') return;
     var tag = document.createElement('link');
     tag.rel = 'preload';
     tag.href = item.href;
