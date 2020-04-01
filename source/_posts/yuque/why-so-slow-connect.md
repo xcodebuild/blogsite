@@ -1,7 +1,7 @@
 
 ---
 
-title: 建立连接为什么这么慢
+title: TCP 建连为什么这么慢
 
 urlname: why-so-slow-connect
 
@@ -23,7 +23,7 @@ tags: []
 
 <a name="IaUYe"></a>
 ### RTT 一般是多久
-最简单的方式就是 Ping 一下，我们在 Ping 的时候看到的 `time=xxms`  一般**接近于一个 RTT**<br />**
+最简单的方式就是 Ping 一下，我们在 Ping 的时候看到的 `time=xxms`  一般**接近于一个 RTT**
 ```bash
 PING 115.239.211.112 (115.239.211.112): 56 data bytes
 64 bytes from 115.239.211.112: icmp_seq=0 ttl=55 time=4.411 ms

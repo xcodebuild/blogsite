@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "hexo-generator-feed": "^2.2.0",
+    "hexo-generator-sitemap": "^2.0.0",
     "yuque-hexo": "^1.6.2"
   }
 }
