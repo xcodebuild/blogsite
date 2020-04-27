@@ -1,7 +1,7 @@
 
 ---
 
-title: 为什么网页渲染这么慢
+title: 网页渲染为什么这么慢
 
 urlname: why-so-slow-webpage-rendering
 
