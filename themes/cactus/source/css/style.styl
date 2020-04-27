@@ -1079,31 +1079,18 @@ code
   .line
     height: 22px
 
-
-.skeleton {
-  background: #2c3d50;
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 25%, transparent 25%) !important;
-  background-size: 20rem 20rem;
-  animation: skeleton-stripes 1s linear infinite;
-  border-radius: 5px;
-}
-
-@keyframes skeleton-stripes {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 20rem 0;
-    }
-}
-
 .github-box {
   height: 10rem;
   width: 100%;
   display: block;
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  padding: 1.5rem;
   background: #2c3d50;
   font-size: 0.8rem;
+
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:hover {
     background: #364b63 !important;
