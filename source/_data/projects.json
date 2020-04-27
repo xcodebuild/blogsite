@@ -1,0 +1,7 @@
+[
+    {
+       "name":"LightProxy",
+       "url":"https://github.com/alibaba/lightproxy",
+       "desc":"Web debugging proxy based Electron & whistle"
+    }
+]
