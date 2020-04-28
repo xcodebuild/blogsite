@@ -4,15 +4,18 @@
   </div>
   <script>
     (function() {
-      var api = 'https://cors-anywhere.herokuapp.com/https://gist.githubusercontent.com/xcodebuild/dac7feb404b2fa6522713b2387d8b25d/raw/b51a50f0f8fd2f4d8155b5fc5819af558de82d4a/My%2520Activity';
+      var api = 'https://jsonp.afeld.me/?url=https%3A%2F%2Fgist.githubusercontent.com%2Fxcodebuild%2Fdac7feb404b2fa6522713b2387d8b25d%2Fraw%2Fb51a50f0f8fd2f4d8155b5fc5819af558de82d4a%2FMy%252520Activity';
       var target = document.getElementById('github_activity_content');
+      var hasData = false;
       var onError = function() {
-        document.getElementById('github_activity').remove();
+        if (!hasData) {
+          document.getElementById('github_activity').remove();
+        }
       }
-
       var onData = function(text) {
         target.innerText = text;
         target.classList.remove('skeleton');
+        hasData = true;
       }
 
       setTimeout(function() {
