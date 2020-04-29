@@ -34,7 +34,9 @@
                 img.style = '';
                 document.getElementById('feed-tip').remove();
               }
-              c.src = imgUrl;
+              document.addEventListener('load', function() {
+                  c.src = imgUrl;
+              });
             })
           </script>
         </a>
