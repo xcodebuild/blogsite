@@ -3,33 +3,30 @@
 	<div id="disqus_thread"></div>
    </div>
 <script>
-function loadDisqus() {
-  var d = document, s = d.createElement('script');
-  s.src = 'https://xcodebuild.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  window.disqus_config = function () {
-    this.page.url = location.href;
-    this.page.identifier = location.pathname;
-  };
-}
 
-var runningOnBrowser = typeof window !== "undefined";
-var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent);
-var supportsIntersectionObserver = runningOnBrowser && "IntersectionObserver" in window;
-
-setTimeout(function () {
-  if (!isBot && supportsIntersectionObserver) {
-    var disqus_observer = new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting) {
-        loadDisqus();
-        disqus_observer.disconnect();
-      }
-    }, { threshold: [0] });
-    disqus_observer.observe(document.getElementById('disqus_thread'));
-  } else {
-    loadDisqus();
-  }
-}, 1);
+setTimeout(function() {
+  window.addEventListener('load', function() {
+    console.log('load comment');
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdn.jsdelivr.net/npm/disqusjs@1.2.6/dist/disqusjs.css';
+    document.head.appendChild(link);
+  
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/disqusjs@1.2.6/dist/disqus.js';
+    script.onload = function() {
+      new DisqusJS({
+        shortname: 'xcodebuild',
+        identifier: location.pathname,
+        url: location.href,
+        api: 'https://disqusjs-proxy-opal.now.sh/',
+        apikey: 'HKua6kOi0Gfy4qHOBJTBypOpNmwIeSfd3QDJU50cdLueN039tddokbA1aLtDTVR1',
+        admin: 'xcodebuild',
+        adminLabel: ''
+      });
+    };
+    document.head.appendChild(script);
+  })
+});
 </script>
 <% } %>
