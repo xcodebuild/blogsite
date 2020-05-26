@@ -8,6 +8,7 @@ hexo.init().then(function () {
       data.content = data.content.replace(/\"(\/images\/.*)\"/g, '"https://cdn.jsdelivr.net/gh/xcodebuild/xcodebuild-blog@master/source/$1"');
       data.content = data.content.replace(/\"(\/css\/.*)\"/g, '"https://cdn.jsdelivr.net/gh/xcodebuild/xcodebuild-blog@master/source/$1"');
       data.content = data.content.replace(/\"(\/lib\/.*)\"/g, '"https://cdn.jsdelivr.net/gh/xcodebuild/xcodebuild-blog@master/source/$1"');
+      data.content = data.content.replace(/\"(\/js\/.*)\"/g, '"https://cdn.jsdelivr.net/gh/xcodebuild/xcodebuild-blog@master/source/$1"');
       return data;
     });
 
