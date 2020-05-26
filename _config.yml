@@ -122,8 +122,3 @@ feed:
   order_by: -date
   autodiscovery: true
   template:
-
-all_minifier: true
-lazyload:
-  enable: true
-  onlypost: false
