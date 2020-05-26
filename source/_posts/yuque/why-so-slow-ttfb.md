@@ -13,7 +13,7 @@ tags: []
 TTFB （Time to First Byte）是指客户端从发起请求到接收到服务器响应的第一个字节的时间，是反应网站性能的一个重要指标 。由于网页的下载时间受到页面体积，客户端带宽等影响更大，TTFB 一般来说能够更好的反应服务端的性能。
 <a name="1d6b723c"></a>
 ## 精确定义
-上面说"从发起请求到接收到服务器响应的第一个字节"仍然有一些模糊，精确一点说，是在完成 DNS 查询、TCP 握手、SSL 握手后 **发起 HTTP 请求报文 **到 **接收到服务端第一个响应报文** 的时间差距。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585797190134-89e36276-31aa-487b-978d-5c9065ffc621.png#align=left&display=inline&height=429&name=image.png&originHeight=858&originWidth=862&size=128265&status=done&style=none&width=431)
+上面说"从发起请求到接收到服务器响应的第一个字节"仍然有一些模糊，精确一点说，是在完成 DNS 查询、TCP 握手、SSL 握手后 **发起 HTTP 请求报文 **到 **接收到服务端第一个响应报文** 的时间差距。<br />![image.png](/images/assets/1585797190134-89e36276-31aa-487b-978d-5c9065ffc621.png)
 <a name="RTT"></a>
 ## RTT 和 TCP 建连 
 如果不了解 RTT 和 TCP 建连的耗时，可以看一下 [TCP 建连为什么这么慢](https://www.xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
@@ -41,11 +41,11 @@ TTFB （Time to First Byte）是指客户端从发起请求到接收到服务器
 为了验证这个推论是否正确，我们用一些 RT 基本为零的页面进行验证。其中 Initial Connection 的时间（TCP 握手时间）也是接近 1 RTT 的。所以总体来说 TTFB 应该和  Initial Connection 非常接近。
 <a name="4e2410fd"></a>
 #### 空页面
-准备搞台海外机器实际试试看 TTFB 和 RTT 的差距，空页面是非常接近的<br />![](https://cdn.nlark.com/yuque/0/2020/png/236311/1585796879380-d29fc5fd-495e-45ca-8035-52e904a47d4c.png#align=left&display=inline&height=790&originHeight=790&originWidth=1924&size=0&status=done&style=none&width=1924)<br />
+准备搞台海外机器实际试试看 TTFB 和 RTT 的差距，空页面是非常接近的<br />![](/images/assets/1585796879380-d29fc5fd-495e-45ca-8035-52e904a47d4c.png)<br />
 
 <a name="117d2ea0"></a>
 ### 大体积页面
-怀疑页面大小是导致协议层的开销增大（会拆成多个 TCP 包），找了个 gzip 后 100kb 的 js，访问一下看看<br />![](https://cdn.nlark.com/yuque/0/2020/png/236311/1585796879373-a00576f2-669e-46f7-a45c-f928b59d01af.png#align=left&display=inline&height=920&originHeight=920&originWidth=1914&size=0&status=done&style=none&width=1914)<br />似乎稍微大了一丢丢，但差距仍然很小，试试看更大的（gzip后仍有 1.x MB）<br />![](https://cdn.nlark.com/yuque/0/2020/png/236311/1585796879379-d368668f-4fa3-4c0d-a0d4-85f12041a9ab.png#align=left&display=inline&height=908&originHeight=908&originWidth=1926&size=0&status=done&style=none&width=1926)<br />
+怀疑页面大小是导致协议层的开销增大（会拆成多个 TCP 包），找了个 gzip 后 100kb 的 js，访问一下看看<br />![](/images/assets/1585796879373-a00576f2-669e-46f7-a45c-f928b59d01af.png)<br />似乎稍微大了一丢丢，但差距仍然很小，试试看更大的（gzip后仍有 1.x MB）<br />![](/images/assets/1585796879379-d368668f-4fa3-4c0d-a0d4-85f12041a9ab.png)<br />
 看到差距仍然非常小，所以说页面的体积对于 TTFB 是基本没有影响的，不会因为回传的 HTTP 报文太大导致首字节传输耗时明显增大。
 <a name="f63d1776"></a>
 ### 如何降低 TTFB
@@ -138,7 +138,7 @@ TTFB - RT = 1024 - 786 = 238
 ##### 单点测试结论
 可以看到 Akamai 的动态加速实际上使 TTFB - RT - RTT 的时间更长了（因为 CDN 节点本身的 RTT 短），同时 TTFB - RT 也变长了（CDN 会 buffer 一定量的数据才返回）。**然而总体的传输时间从 8.7s 降低到了 1.8s。**<br />
 这和我们之前对首屏的观测也是一致的，动态加速拉长了 TTFB，但总体首屏是下降的。因为用户是要下载一定有效的内容才能真正进行渲染。<br />
-![](https://cdn.nlark.com/yuque/0/2020/png/236311/1585796879410-eb31a3ce-3064-4d5d-8c94-18dacb1c2770.png#align=left&display=inline&height=484&originHeight=484&originWidth=1742&size=0&status=done&style=none&width=1742)
+![](/images/assets/1585796879410-eb31a3ce-3064-4d5d-8c94-18dacb1c2770.png)
 <a name="54bbba80"></a>
 ## 结论
 TTFB 是一个非常重要的网站性能指标，能够在前端比较客观的反应出后端的耗时。**但是 First Byte 是无法渲染出任何东西的**，我们用 TTFB 来侧面衡量网站的后端耗时**不代表 TTFB 越短越好**。<br />

@@ -13,11 +13,11 @@ tags: []
 > 原文地址：[https://github.com/alibaba/lightproxy/issues/19](https://github.com/alibaba/lightproxy/issues/19)
 
 <a name="u8H7E"></a>
-## ![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578205382432-2c9cc104-2fef-4ea8-b31e-951cbee73da4.png#align=left&display=inline&height=75&name=image.png&originHeight=150&originWidth=400&size=12307&status=done&style=none&width=200)
+## ![image.png](/images/assets/1578205382432-2c9cc104-2fef-4ea8-b31e-951cbee73da4.png)
 
 `LightProxy` 是 `IFE` 团队开发的一款基于 `Electron` 和 `whistle` 的开源桌面代理软件，致力于让前端开发人员能够精确的掌握自己的开发环境，通过 `HTTP` 代理使用规则转发、修改每一个请求和响应的内容。
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578205761175-e5d216c9-dd52-4d73-98de-d8638791f017.png#align=left&display=inline&height=352&name=image.png&originHeight=1005&originWidth=1500&size=224010&status=done&style=none&width=525)
+![image.png](/images/assets/1578205761175-e5d216c9-dd52-4d73-98de-d8638791f017.png)
 <a name="vz7QC"></a>
 ## 
 <a name="NJPM5"></a>
@@ -28,7 +28,7 @@ tags: []
 
 当开发环境陷入一种不健康的状态时，开发者就更容易破罐子破摔。宁可忍受每改一行代码重新手动 `build` 几分钟再开发也不愿意花时间让 watch 可用，然后发现自己越来越忙乱。
 
-> ![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578206007497-b7935205-d8a8-4fc3-866d-0bc62c5a2814.png#align=left&display=inline&height=120&name=image.png&originHeight=239&originWidth=211&size=134204&status=done&style=none&width=105.5)
+> ![image.png](/images/assets/1578206007497-b7935205-d8a8-4fc3-866d-0bc62c5a2814.png)
 > 
 > 希腊神话中有一个受到惩罚的人西西弗斯，他受罚的方式是：必须将一块巨石推上山顶，而每次到达山顶后巨石又滚回山下，如此永无止境地重复下去。在西方语境中，形容词“西西弗斯式的”（英语：sisyphean）形容“永无尽头而又徒劳无功的任务”。
 
@@ -51,7 +51,7 @@ tags: []
 
 这种改一行等几十分钟的开发方式对效率的拖累是极其恐怖的。
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578275488620-13ad673e-fa57-4715-b1d7-fd6adf8dbc5f.png#align=left&display=inline&height=112&name=image.png&originHeight=224&originWidth=225&size=100533&status=done&style=none&width=112.5)
+![image.png](/images/assets/1578275488620-13ad673e-fa57-4715-b1d7-fd6adf8dbc5f.png)
 
 <a name="r9l9z"></a>
 ### 和线上的一致性
@@ -87,7 +87,7 @@ const API_BASE = utils.isDaily ? 'http://localhost:7001:': 'https://xxxx/';
 https://www.alibaba.com/ htmlPrepend://(<div>test</div>)
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578276397871-fcf46678-c2a3-48bb-83cd-02bf2bd7e201.png#align=left&display=inline&height=139&name=image.png&originHeight=278&originWidth=1099&size=93886&status=done&style=none&width=549.5)
+![image.png](/images/assets/1578276397871-fcf46678-c2a3-48bb-83cd-02bf2bd7e201.png)
 
 就可以在一个线上的页面中插入一个 `div` 。
 
@@ -117,7 +117,7 @@ https://xxx.com/xx.json `test text`
 ## 快速确认
 为了能够快速确认代理是否按预期工作，我们在经过 `LightProxy` 代理的网络请求的 Response Header 增加了一些相关的信息，用于协助开发人员快速确认当前请求命中了什么规则，以及这个请求是怎么来的（由谁响应，匹配什么规则，实际真正访问的来源）。
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578276694637-f5b52b24-5e76-43c4-9425-3f2787c7e8c5.png#align=left&display=inline&height=85&name=image.png&originHeight=170&originWidth=1022&size=29831&status=done&style=none&width=511)
+![image.png](/images/assets/1578276694637-f5b52b24-5e76-43c4-9425-3f2787c7e8c5.png)
 
 <a name="SASae"></a>
 ## 没有银弹
@@ -139,5 +139,5 @@ https://xxx.com/xx.json `test text`
 
 > ps: Whistle 的作者也在群里，欢迎来撩
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1578277057662-2ff248c8-7f29-4ad3-88ff-8381e8a99095.png#align=left&display=inline&height=248&name=image.png&originHeight=1280&originWidth=970&size=338210&status=done&style=none&width=188)
+![image.png](/images/assets/1578277057662-2ff248c8-7f29-4ad3-88ff-8381e8a99095.png)
 

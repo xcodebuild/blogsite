@@ -19,7 +19,7 @@ HTML 显而易见是渲染必不可少的内容，浏览器接收到 HTML 的内
 我们可以在响应头中增加 `Transfer-Encoding:chunked` 告知浏览器 HTML 将会被一块块的流式返回，在这个基础上 facebook 构建了 bigpipe，通过在服务器端流式地返回 HTML 给浏览器，你会看到自己的个人首页是随着数据的加载一块一块的渲染出来的，这样可以避免一次性获取大量的数据才开始渲染页面。
 <a name="JWG6a"></a>
 #### Chunk 和缓冲
-当我们使用 chunk 流式返回 HTML 内容时，我们期望浏览器能够马上渲染接收到的 chunk 块，但实际情况下有些浏览器则会缓冲一定的长度。例如下图中 Safari 使用 bigpipe 渲染，浏览器一直等到 `this is pagelet 1` 才渲染页面，然后完成后续渲染。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585838072215-a9fab628-ddaa-4974-9b19-60dd6e1c69be.png#align=left&display=inline&height=231&name=image.png&originHeight=462&originWidth=1264&size=199221&status=done&style=none&width=632)<br />而当我们把 `Welcome to ...` 加长后 ，Safari 则直接渲染出首屏再完成后续的渲染<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585838081766-1342ab0c-bcdf-4913-9e59-527e4cbf7ab5.png#align=left&display=inline&height=170&name=image.png&originHeight=340&originWidth=1368&size=144463&status=done&style=none&width=684)<br />Chunk 缓冲区的具体长度没有明确的标准，根据 StackOverflow 上的回答，当前客户端 chunk 缓冲区大小大概如下：
+当我们使用 chunk 流式返回 HTML 内容时，我们期望浏览器能够马上渲染接收到的 chunk 块，但实际情况下有些浏览器则会缓冲一定的长度。例如下图中 Safari 使用 bigpipe 渲染，浏览器一直等到 `this is pagelet 1` 才渲染页面，然后完成后续渲染。<br />![image.png](/images/assets/1585838072215-a9fab628-ddaa-4974-9b19-60dd6e1c69be.png)<br />而当我们把 `Welcome to ...` 加长后 ，Safari 则直接渲染出首屏再完成后续的渲染<br />![image.png](/images/assets/1585838081766-1342ab0c-bcdf-4913-9e59-527e4cbf7ab5.png)<br />Chunk 缓冲区的具体长度没有明确的标准，根据 StackOverflow 上的回答，当前客户端 chunk 缓冲区大小大概如下：
 ```html
 Mac:                       text/html:     image/jpeg:
 curl 7.24.0                4096 bytes     
@@ -42,7 +42,7 @@ IE10                       4096 bytes
 ```
 <a name="DMIvU"></a>
 ### CSS
-默认情况下，浏览器同样把 CSS 也认作是渲染必不可少的内容，因为一般来说一个没有 CSS 的页面是无法有效展示的：<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585838094023-264c267c-c92e-4de3-bc0d-dab59cc470fd.png#align=left&display=inline&height=281&name=image.png&originHeight=562&originWidth=686&size=137688&status=done&style=none&width=343)<br />
+默认情况下，浏览器同样把 CSS 也认作是渲染必不可少的内容，因为一般来说一个没有 CSS 的页面是无法有效展示的：<br />![image.png](/images/assets/1585838094023-264c267c-c92e-4de3-bc0d-dab59cc470fd.png)<br />
 所以上面的代码中的 `<link rel="stylesheet" href="styles.css">` 会阻塞首屏的渲染，当浏览器解析到这里时，虽然 DOM 的解析仍然会向下进行，但浏览器会一直等待 `styles.css` 加载完成并且构建成相应的 CSSOM 后再继续渲染。
 <a name="AaPEF"></a>
 #### 媒体查询和阻塞渲染
@@ -109,7 +109,7 @@ DOM 后的 Script 不会阻塞前面已经加载好的 DOM 的渲染，所以一
 <a name="uk7BE"></a>
 ## JavaScript 对渲染的影响
 上面说 Script 对渲染的影响，主要还是说资源文件的网络加载阻塞了页面渲染。而除了这些情况外，其实 JS 本身的执行就是会对页面渲染造成影响的。<br />
-我们都知道页面中的 JavaScript 代码（除了 Worker）都运行在一个线程中，由 EventLoop 驱动<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585838012767-3aa4b188-ef41-4743-bf5d-1f35cbfc9c01.png#align=left&display=inline&height=158&name=image.png&originHeight=316&originWidth=1220&size=116969&status=done&style=none&width=610)<br />浏览器在事件循环中需要等待队列中的 JS 执行完毕，才能确定是否需要更新渲染，所以 JS 的执行本身其实就会导致渲染被阻塞。<br />
+我们都知道页面中的 JavaScript 代码（除了 Worker）都运行在一个线程中，由 EventLoop 驱动<br />![image.png](/images/assets/1585838012767-3aa4b188-ef41-4743-bf5d-1f35cbfc9c01.png)<br />浏览器在事件循环中需要等待队列中的 JS 执行完毕，才能确定是否需要更新渲染，所以 JS 的执行本身其实就会导致渲染被阻塞。<br />
 下面这个例子中，由于 JS 一直阻塞了 EventLoop， `test` 这个元素是不会被渲染出来的。
 ```html
 <script>

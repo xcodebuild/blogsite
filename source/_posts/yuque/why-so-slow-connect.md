@@ -13,13 +13,13 @@ tags: []
 我们都知道 `HTTP` 是基于 `TCP` 的，而 `TCP` 是面向连接的。当我们向服务器请求一个页面时，首先需要建立 `TCP` 连接，才能开始真正开始传输内容。<br />
 这个时间平时不容易被人察觉，因为开发场景下我们往往不需要重新建立连接。但是在有些场景（尤其是新用户场景、landing page 等）却会对页面的性能造成很大的影响。<br />
 图中 TCP 的部分为我们常说的建连时间（这里包含了 SSL 握手时间，下文的建连时间也指的是这段时间），前面的 DNS 时间往往和建连时间同时出现，后面会讲到这一点。<br />
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1584964408688-4c021c34-501c-408c-a704-1f30656ccbb1.png#align=left&display=inline&height=383&name=image.png&originHeight=879&originWidth=1473&size=106021&status=done&style=none&width=641)
+![image.png](/images/assets/1584964408688-4c021c34-501c-408c-a704-1f30656ccbb1.png)
 <a name="7I6OJ"></a>
 ## 建连应该耗时多久
 <a name="ppSgn"></a>
 ### RTT
 在介绍建连的耗时之前，我们先介绍一下 `RTT(Round-Trip Time)` 的概念。RTT，即往返时延。指的是从发送端发送数据开始，到发送端收到来自接收端的确认（ACK）的时间。一般来说这个时间是由物理距离，网络传输路径等决定的。<br />
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1584964922127-65173f15-e1ec-4fb1-ade1-74b65cfc8e8e.png#align=left&display=inline&height=292&name=image.png&originHeight=584&originWidth=720&size=197676&status=done&style=none&width=360)<br />
+![image.png](/images/assets/1584964922127-65173f15-e1ec-4fb1-ade1-74b65cfc8e8e.png)<br />
 
 <a name="IaUYe"></a>
 ### RTT 一般是多久
@@ -48,7 +48,7 @@ TCP 一种面向连接的通讯协议，在两个目标间发送 TCP 数据之�
 这种情况说的是纯粹的 `Connect` 时间，不包括 `SSL` ，所以只是对 `http` 协议而言的，如果是 `https` 协议还需要再考虑 SSL 握手的时间，我们后续会在别的文章中介绍。
 <a name="guKHx"></a>
 #### 动手试试
-我们可以使用 `WireShark` 来抓取一次  `http` 请求来看看建连的过程。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1584966581339-1ff4f09d-c1dc-4dab-a0ef-636e942cf5fa.png#align=left&display=inline&height=597&name=image.png&originHeight=1194&originWidth=2192&size=1880284&status=done&style=none&width=1096)<br />可以看到这里从发起 `seq` 到收到 `ack` （经过 1 `RTT` ）后，客户端就没有再等待直接发起了 `GET / HTTP/1.1` 的请求。
+我们可以使用 `WireShark` 来抓取一次  `http` 请求来看看建连的过程。<br />![image.png](/images/assets/1584966581339-1ff4f09d-c1dc-4dab-a0ef-636e942cf5fa.png)<br />可以看到这里从发起 `seq` 到收到 `ack` （经过 1 `RTT` ）后，客户端就没有再等待直接发起了 `GET / HTTP/1.1` 的请求。
 <a name="tmNZ6"></a>
 ## 如何优化建连时间
 <a name="vhZdc"></a>
@@ -58,17 +58,17 @@ TCP 一种面向连接的通讯协议，在两个目标间发送 TCP 数据之�
 > 这是一个测试页面，源代码托管在：[https://github.com/xcodebuild/why-so-slow/blob/master/connect/index.html](https://github.com/xcodebuild/why-so-slow/blob/master/connect/index.html)
 
 
-<br />就像上面说的，我们在开发场景下往往不需要重新连接，包括 `Disable Cache` 是不会禁用 `TCP` 的连接复用的，所以我们使用 [Webpage Test](https://www.webpagetest.org/) 来看一下这个页面的性能状况。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585020683958-c843ada1-7492-44d1-8c71-e65389fb9850.png#align=left&display=inline&height=582&name=image.png&originHeight=1164&originWidth=1910&size=229615&status=done&style=none&width=955)<br />
+<br />就像上面说的，我们在开发场景下往往不需要重新连接，包括 `Disable Cache` 是不会禁用 `TCP` 的连接复用的，所以我们使用 [Webpage Test](https://www.webpagetest.org/) 来看一下这个页面的性能状况。<br />![image.png](/images/assets/1585020683958-c843ada1-7492-44d1-8c71-e65389fb9850.png)<br />
 我们可以看到这这个页面的 JavaScript 文件以及后面的 `fetch` 请求都有个很长的 `DNS + Connect + SSL` 时间。因为他们的域名不同，所以需要重新解析域名。不是同一个 TCP 连接，所以需要重新建连（包括 SSL 握手）。<br />
 在图中这个 `fetch` 请求的 `Connect + SSL` 一共耗时 `500ms` ，意味着用户必须等待这个建连完成后才能真正发起这个请求。
 <a name="zlxEH"></a>
 ### pre-connect
-为了解决上面这种问题，Chrome 引入了 [`Preconnect`](https://web.dev/uses-rel-preconnect/) （现在大部分浏览器都是支持的）。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585102598647-3d2dd3b0-fbfc-4bbc-99f5-10debdf6ee91.png#align=left&display=inline&height=150&name=image.png&originHeight=300&originWidth=736&size=76442&status=done&style=none&width=368)<br />我们可以在页面的 `<head>` 中加入
+为了解决上面这种问题，Chrome 引入了 [`Preconnect`](https://web.dev/uses-rel-preconnect/) （现在大部分浏览器都是支持的）。<br />![image.png](/images/assets/1585102598647-3d2dd3b0-fbfc-4bbc-99f5-10debdf6ee91.png)<br />我们可以在页面的 `<head>` 中加入
 ```html
 <link rel="preconnect" href="https://www.mocky.io" crossorigin>
 ```
 
-<br />来告知浏览器提前建立连接。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585043302410-4fc5bf0c-b9f3-45ef-bba2-3ebbe7ce0ce0.png#align=left&display=inline&height=269&name=image.png&originHeight=538&originWidth=1994&size=401496&status=done&style=none&width=997)<br />可以看到这种情况下，我们在 JS 加载后前（实际上 `fetch` 这个时候才能开始执行），就开始建立连接。同时 `preconnect` 也附带着让浏览器提前进行了 DNS 解析。
+<br />来告知浏览器提前建立连接。<br />![image.png](/images/assets/1585043302410-4fc5bf0c-b9f3-45ef-bba2-3ebbe7ce0ce0.png)<br />可以看到这种情况下，我们在 JS 加载后前（实际上 `fetch` 这个时候才能开始执行），就开始建立连接。同时 `preconnect` 也附带着让浏览器提前进行了 DNS 解析。
 <a name="QIrav"></a>
 ### 连接复用
 当然如果直接使用同一个连接，即使不使用 `pre-connect` 就能天然减少额外的连接次数。
@@ -109,7 +109,7 @@ TCP 一种面向连接的通讯协议，在两个目标间发送 TCP 数据之�
 <img src="https://i.picsum.photos/id/1061/300/300.jpg" crossorigin/>
 ```
 
-<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585190581512-5105a07b-5871-4d57-ac19-829f926b978c.png#align=left&display=inline&height=458&name=image.png&originHeight=916&originWidth=1924&size=538733&status=done&style=none&width=962)<br />这样就会发现前面两个和后面两个分别能够复用连接，但是 `cors` 的和 `non-cors` 的不能复用连接。
+<br />![image.png](/images/assets/1585190581512-5105a07b-5871-4d57-ac19-829f926b978c.png)<br />这样就会发现前面两个和后面两个分别能够复用连接，但是 `cors` 的和 `non-cors` 的不能复用连接。
 > 其实这里如果有 crossorigin="use-credentials"，其和 cors 也不能复用连接
 
 具体这么做的原因主要是为了安全考虑，在 [https://github.com/whatwg/fetch/issues/341](https://github.com/whatwg/fetch/issues/341) 中有提到，在这里不展开。
@@ -118,7 +118,7 @@ TCP 一种面向连接的通讯协议，在两个目标间发送 TCP 数据之�
 知道了怎么确定一个连接后，我们就知道怎么避免连接没有复用的问题。无论是我们尝试让两个请求复用一个连接还是通过 `preconnect` 去提前建连，都应该保持其 `cors` 和 `credentials` 的一致性。<br />
 由于实际规则其实蛮复杂的，并不能保证我们总是能判断策略是否符合预期，**还是建议通过 `WebPageTest` 等工具验证是否有多余的建连。**<br />
 当然通过 Chrome Devtools 也能够验证这一点，我们可以在 Network 面板打开 `Connection ID` ，可以看到不同的连接使用的 `Connection ID` 是不同的。<br />
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/236311/1585191129731-7ff634e7-4184-4de0-98a0-d3339c388644.png#align=left&display=inline&height=101&name=image.png&originHeight=202&originWidth=2012&size=181126&status=done&style=none&width=1006)
+![image.png](/images/assets/1585191129731-7ff634e7-4184-4de0-98a0-d3339c388644.png)
 <a name="EyboO"></a>
 ## 为什么要握手
 为什么一定要先握手才能发送 HTTP 报文呢？这是由 TCP 本身的设计决定的，TCP 是一种可靠的传输层通信协议。所谓可靠，就是能保证数据流的顺序和完整性。

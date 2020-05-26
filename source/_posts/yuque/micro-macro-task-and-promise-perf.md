@@ -43,7 +43,7 @@ count = 3;
 > 当浏览器需要做一些渲染工作时，会等待这一帧的渲染工作完成，再进入下一个事件循环
 
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/236311/1577197618038-db7d48f3-aaa0-454c-b75d-976ee1deca9f.png#align=left&display=inline&height=304&name=image.png&originHeight=912&originWidth=1788&size=336135&status=done&style=none&width=596)
+![image.png](/images/assets/1577197618038-db7d48f3-aaa0-454c-b75d-976ee1deca9f.png)
 
 那么，为什么已经有了这么一个机制，为什么又要有所谓的微任务呢，难道只是为了让大家猜测不同异步任务的执行时序么？
 
@@ -120,7 +120,7 @@ test();
 
 默认就是使用 `setTimout` 模拟的 `Promise.resolve` ，我们在 [https://jsperf.com/promise-performance-with-timers](https://jsperf.com/promise-performance-with-timers) 可以看到性能的对比已经有了数量级的差距（事实上比较复杂的异步任务会感觉到明显的延迟）。
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/236311/1577197618078-d26207a8-f401-4bcc-8049-5859303cf138.png#align=left&display=inline&height=406&name=image.png&originHeight=1218&originWidth=1950&size=202161&status=done&style=none&width=650)
+![image.png](/images/assets/1577197618078-d26207a8-f401-4bcc-8049-5859303cf138.png)
 
 
 <a name="czISa"></a>
@@ -147,12 +147,12 @@ const timerFunc = (cb) => {
 
 使用这种方式就明显把数量级拉了回来
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/236311/1577197618165-bce37f3c-a859-4312-8e3f-7f717c0757dd.png#align=left&display=inline&height=359&name=image.png&originHeight=1076&originWidth=1952&size=173379&status=done&style=none&width=650.6666666666666)
+![image.png](/images/assets/1577197618165-bce37f3c-a859-4312-8e3f-7f717c0757dd.png)
 
 
 > 由于这个 Promise 本身实现偏向于体积的缘故，这里的 benchmark 性能仍有数倍差距，但其实 `bluebird` 等注重性能的实现方式在 `timer` 函数用 `MutationObserver` 构造的情况下性能和原生不相上下，某些版本的浏览器下甚至更快
 > 
-> **![image.png](https://cdn.nlark.com/yuque/0/2019/png/236311/1577197618171-ffb74451-d0c7-417c-8655-8ef5ae500449.png#align=left&display=inline&height=303&name=image.png&originHeight=908&originWidth=1264&size=58867&status=done&style=none&width=421.3333333333333)**
+> **![image.png](/images/assets/1577197618171-ffb74451-d0c7-417c-8655-8ef5ae500449.png)**
 
 
 
