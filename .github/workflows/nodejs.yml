@@ -19,15 +19,15 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - env: # Or as an environment variable
-      OSS_ACCESSKEY_ID: ${{ secrets.OSS_ACCESSKEY_ID }}
-      OSS_ACCESSKEY_SECRET: ${{ secrets.OSS_ACCESSKEY_SECRET }}
-      OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
-      OSS_REGION: ${{ secrets.OSS_REGION }}
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: node depoly.js
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - env: 
+          OSS_ACCESSKEY_ID: ${{ secrets.OSS_ACCESSKEY_ID }}
+          OSS_ACCESSKEY_SECRET: ${{ secrets.OSS_ACCESSKEY_SECRET }}
+          OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+          OSS_REGION: ${{ secrets.OSS_REGION }} 
+        run: node depoly.js
