@@ -124,3 +124,6 @@ feed:
   template:
 
 all_minifier: true
+lazyload:
+  enable: true
+  onlypost: false
