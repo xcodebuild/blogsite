@@ -73,7 +73,7 @@ logo:
   enabled: true
   width: 50
   height: 50
-  url: /images/logo.png
+  url: https://cdn.jsdelivr.net/gh/xcodebuild/blogsite@master/themes/cactus/source/images/logo.png
   gravatar: false
 
 # Customize the favicons.
