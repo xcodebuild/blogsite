@@ -16,7 +16,7 @@ direction:
 nav:
   home: /
   articles: /archives/
-  RSS: https://www.xcodebuild.com/atom.xml
+  RSS: https://xcodebuild.com/atom.xml
 
 
 # Links to your social media accounts.

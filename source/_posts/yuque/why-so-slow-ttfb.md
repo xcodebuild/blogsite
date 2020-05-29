@@ -16,7 +16,7 @@ TTFB （Time to First Byte）是指客户端从发起请求到接收到服务器
 上面说"从发起请求到接收到服务器响应的第一个字节"仍然有一些模糊，精确一点说，是在完成 DNS 查询、TCP 握手、SSL 握手后 **发起 HTTP 请求报文 **到 **接收到服务端第一个响应报文** 的时间差距。<br />![image.png](/images/assets/1585797190134-89e36276-31aa-487b-978d-5c9065ffc621.png)
 <a name="RTT"></a>
 ## RTT 和 TCP 建连 
-如果不了解 RTT 和 TCP 建连的耗时，可以看一下 [TCP 建连为什么这么慢](https://www.xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
+如果不了解 RTT 和 TCP 建连的耗时，可以看一下 [TCP 建连为什么这么慢](https://xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
 <a name="41933693"></a>
 ## TTFB 多少是个合理值
 我们拿到 TTFB 这个指标后，最广泛的问题就是 TTFB 究竟应该多少是个合理值？一般来说，我们可以泛泛地认为对于静态页面，50ms 是个非常理想的值（因为大部分情况下 RTT 基本就在这个范围了），而如果超过了 500ms，一般用户就会感觉到明显的等待。

@@ -65,7 +65,7 @@ tags: []
 
 - 减少可控部分的重定向，应该使用 `301` 的地方不要使用 `302` ，尽量不投放短链或者需要不必要重定向的连接
 - 固定的 302 逻辑（例如设备重定向到不同域名）可以前置到 CDN，减少耗时
-- 如果是未来即将发生的 redirect，我们可以使用 preconnect 等提前建立 redirect 的目标连接，可以参见：[TCP 建连为什么这么慢](https://www.xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
+- 如果是未来即将发生的 redirect，我们可以使用 preconnect 等提前建立 redirect 的目标连接，可以参见：[TCP 建连为什么这么慢](https://xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
 - `beforeFetch` 的时间在某些场景（例如邮件，推送等）场景确实会高很多，除了这些场景可能存在更多重定向外，也有可能是因为浏览器启动耗时也被统计进去了
 
 
@@ -73,6 +73,6 @@ tags: []
 <a name="RQRec"></a>
 ## 参考阅读
 
-- [TCP 建连为什么这么慢](https://www.xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
+- [TCP 建连为什么这么慢](https://xcodebuild.com/2020/03/26/yuque/why-so-slow-connect/)
 - [Timing-Allow-Origin](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Timing-Allow-Origin)
 
